@@ -21,10 +21,7 @@ namespace Examples
             if (args == null || args.Length < 1)
             {
                 Console.WriteLine();
-                Console.WriteLine("Usage: ./{0} HWClient [Endpoint]", AppDomain.CurrentDomain.FriendlyName);
                 Console.WriteLine();
-                Console.WriteLine("    Endpoint  Where HWClient should connect to.");
-                Console.WriteLine("              Default is tcp://127.0.0.1:5555");
                 Console.WriteLine();
                 args = new string[] { "tcp://127.0.0.1:5555" };
             }
@@ -40,7 +37,10 @@ namespace Examples
 
                 for (int n = 0; n < 10; ++n)
                 {
-                    string requestText = "Hello";
+                    string requestText;
+                    Console.Write("Message: ");
+                    requestText = Console.ReadLine();
+                    Console.WriteLine();
                     Console.Write("Sending {0}…", requestText);
 
                     // Send
