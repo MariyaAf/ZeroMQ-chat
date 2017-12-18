@@ -2,14 +2,55 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
-namespace ConsoleApp1
+using ZeroMQ;
+
+namespace Examples
 {
-    class Program
+    static partial class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            //
+            // Hello World server
+            //
+            // Author: metadings
+            //
+
+            if (args == null || args.Length < 1)
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("Server");
+                Console.WriteLine();
+                args = new string[] { "" };
+            }
+
+            string name = args[0];
+
+            // Create
+            using (var context = new ZContext())
+            using (var responder = new ZSocket(context, ZSocketType.REP))
+            {
+                // Bind
+                responder.Bind("tcp://*:5000");
+
+                while (true)
+                {
+                    // Receive
+                    using (ZFrame request = responder.ReceiveFrame())
+                    {
+                        Console.WriteLine("Received {0}", request.ReadString());
+
+                        // Do some work
+                        Thread.Sleep(10);
+
+                        // Send
+                        responder.Send(new ZFrame(name));
+                    }
+                }
+            }
         }
     }
 }
