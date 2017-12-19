@@ -12,18 +12,14 @@ namespace Examples
     {
         public static void Main(string[] args)
         {
-            //
-            // Hello World client
-            //
-            // Author: metadings
-            //
+           
 
             if (args == null || args.Length < 1)
             {
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine();
-                args = new string[] { "tcp://127.0.0.1:5555" };
+                args = new string[] { "tcp://192.168.0.1:8080" };
             }
 
             string endpoint = args[0];

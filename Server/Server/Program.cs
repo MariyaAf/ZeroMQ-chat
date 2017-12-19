@@ -12,11 +12,6 @@ namespace Examples
     {
         public static void Main(string[] args)
         {
-            //
-            // Hello World server
-            //
-            // Author: metadings
-            //
 
             if (args == null || args.Length < 1)
             {
@@ -34,7 +29,7 @@ namespace Examples
             using (var responder = new ZSocket(context, ZSocketType.REP))
             {
                 // Bind
-                responder.Bind("tcp://*:5000");
+                responder.Bind("tcp://*:8080");
 
                 while (true)
                 {
